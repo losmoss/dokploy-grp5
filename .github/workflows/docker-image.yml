@@ -27,8 +27,8 @@ jobs:
       run: |
         docker build . \
           --file Dockerfile \
-          --tag lucaspadnot/app-github:${{ steps.vars.outputs.TAG }}
+          --tag lucaspadnot/app-github:latest
 
     - name: Push de l'image Docker vers Docker Hub
       run: |
-        docker push lucaspadnot/app-github:${{ steps.vars.outputs.TAG }}
+        docker push lucaspadnot/app-github:latest
