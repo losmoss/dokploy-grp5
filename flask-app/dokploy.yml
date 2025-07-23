@@ -6,6 +6,10 @@ app:
     command: pip install -r requirements.txt
     run: python app.py
   replicas: 3
+  deploy:
+    replicas: 3
+    placement:
+    constraints: []
   env:
     - name: FLASK_ENV
       value: production
