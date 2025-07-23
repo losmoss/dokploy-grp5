@@ -2,17 +2,23 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ "main" ]  # ← build à chaque push sur main
+  workflow_dispatch:       # ← déclenchement manuel (optionnel)
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Checkout du code
+      uses: actions/checkout@v4
+
+    - name: Générer un tag basé sur le commit
+      id: vars
+      run: echo "TAG=${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+
+    - name: Build de l'image Docker
+      run: |
+        docker build . \
+          --file Dockerfile \
+          --tag my-image-name:${{ steps.vars.outputs.TAG }}
