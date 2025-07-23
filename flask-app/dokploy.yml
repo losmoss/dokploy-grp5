@@ -1,0 +1,11 @@
+app:
+  name: flask-ha-app
+  image: python:3.11
+  port: 5000
+  build:
+    command: pip install -r requirements.txt
+    run: python app.py
+  replicas: 3
+  env:
+    - name: FLASK_ENV
+      value: production
