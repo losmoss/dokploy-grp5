@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello, world! This is a Flask app running in Docker Swarm."
+    return "HBienvenue sur l'application déployé via le HA Github, depuis l'image sur Dockerhub."
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
